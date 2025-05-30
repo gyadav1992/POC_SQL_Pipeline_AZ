@@ -1,0 +1,25 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  dacpacFile: 'myapp-dev.dacpac'
+  sqlUser: 'sqladmin'
+  sqlPassword: '$(sqlPassword)'  # Define this as a secret variable in the pipeline settings
+
+steps:
+- task: SqlAzureDacpacDeployment@1
+  inputs:
+    azureSubscription: '<Your-Azure-Service-Connection>'
+    AuthenticationType: 'sqlAuthentication'
+    ServerName: 'my-sql-serve.database.windows.net'
+    DatabaseName: 'myapp-test-db'
+    SqlUsername: '$(sqlUser)'
+    SqlPassword: '$(sqlPassword)'
+    DacpacFile: '$(System.DefaultWorkingDirectory)/$(dacpacFile)'
+    DeployType: 'DacpacTask'
+
