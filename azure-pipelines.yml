@@ -14,7 +14,7 @@ variables:
 steps:
 - task: SqlAzureDacpacDeployment@1
   inputs:
-    azureSubscription: '<Your-Azure-Service-Connection>'
+    azureSubscription: 'gyadav1992'
     AuthenticationType: 'sqlAuthentication'
     ServerName: 'my-sql-serve.database.windows.net'
     DatabaseName: 'myapp-test-db'
